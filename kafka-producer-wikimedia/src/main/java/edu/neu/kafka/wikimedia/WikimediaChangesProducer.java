@@ -37,10 +37,10 @@ public class WikimediaChangesProducer {
 
         EventHandler eventHandler = new WikimediaChangeHandler(producer, topic);
         String url = "https://stream.wikimedia.org/v2/stream/recentchange";
-        try (EventSource eventSource = new EventSource.Builder(eventHandler, URI.create(url)).build()) {
-            // start the producer in another thread
-            eventSource.start();
-        }
+        EventSource eventSource = new EventSource.Builder(eventHandler, URI.create(url)).build();
+
+        // start the producer in another thread
+        eventSource.start();
 
         // produce for 10 minutes and block the program until then
         TimeUnit.MINUTES.sleep(10);
