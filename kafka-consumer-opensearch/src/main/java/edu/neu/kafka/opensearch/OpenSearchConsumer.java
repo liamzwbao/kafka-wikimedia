@@ -71,6 +71,10 @@ public class OpenSearchConsumer {
                         logger.error(e.getMessage());
                     }
                 }
+
+                // commit offsets after the batch is consumed
+                consumer.commitSync();
+                logger.info("Offsets have been committed");
             }
         }
 
